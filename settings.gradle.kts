@@ -15,3 +15,4 @@ dependencyResolutionManagement {
 
 rootProject.name = "Unisafe Test"
 include(":app")
+include(":directaccessinterface")
