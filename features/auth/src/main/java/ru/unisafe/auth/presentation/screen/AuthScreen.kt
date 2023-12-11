@@ -60,7 +60,7 @@ fun AuthScreen() {
             trailingIcon = {
                 if (!isInProgress)
                     IconButton(
-                        onClick = { /*TODO*/ },
+                        onClick = { viewModel.sendKey() },
                         enabled = !isKeyIncorrect
                     ) {
                         Icon(
@@ -73,69 +73,7 @@ fun AuthScreen() {
             }
         )
         Button(
-            onClick = { /*TODO*/ },
-            enabled = !isInProgress,
-        ) {
-            Text(
-                text = "Получить \nновый ключ",
-                textAlign = TextAlign.Center
-            )
-        }
-    }
-}
-
-@Preview(showBackground = true)
-@Composable
-fun Auth() {
-    var key by remember {
-        mutableStateOf("92EGHS")
-    }
-    val isInProgress by remember {
-        mutableStateOf(false)
-    }
-    var isKeyVerified by remember {
-        mutableStateOf(false)
-    }
-    var isKeyIncorrect by remember {
-        mutableStateOf(false)
-    }
-    val keyLength = 6
-    Column(
-        modifier = Modifier.fillMaxSize(),
-        verticalArrangement = Arrangement.Center,
-        horizontalAlignment = Alignment.CenterHorizontally,
-    ) {
-        OutlinedTextField(
-            value = key, onValueChange = {
-                if (it.length <= keyLength) key = it.uppercase()
-                isKeyVerified = false
-                isKeyIncorrect = false
-            },
-            modifier = Modifier.padding(4.dp),
-            enabled = !isInProgress,
-            textStyle = TextStyle(fontSize = 24.sp),
-            keyboardOptions = KeyboardOptions(capitalization = KeyboardCapitalization.Characters),
-            label = {
-                Text(text = "Ключ доступа")
-            },
-            isError = isKeyIncorrect,
-            trailingIcon = {
-                if (!isInProgress)
-                    IconButton(
-                        onClick = { /*TODO*/ },
-                        enabled = !isKeyIncorrect
-                    ) {
-                        Icon(
-                            imageVector = Icons.Filled.KeyboardArrowRight,
-                            contentDescription = "Send key"
-                        )
-                    }
-                else
-                    CircularProgressIndicator(modifier = Modifier.size(24.dp))
-            }
-        )
-        Button(
-            onClick = { /*TODO*/ },
+            onClick = { viewModel.getNewKey() },
             enabled = !isInProgress,
         ) {
             Text(

@@ -16,3 +16,4 @@ dependencyResolutionManagement {
 rootProject.name = "Unisafe Test"
 include(":app")
 include(":features:auth")
+include(":data")

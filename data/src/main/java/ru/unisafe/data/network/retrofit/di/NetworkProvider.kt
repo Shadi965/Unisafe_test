@@ -1,0 +1,40 @@
+package ru.unisafe.data.network.retrofit.di
+
+import com.squareup.moshi.Moshi
+import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
+import dagger.Module
+import dagger.Provides
+import dagger.hilt.InstallIn
+import dagger.hilt.components.SingletonComponent
+import retrofit2.Retrofit
+import retrofit2.converter.moshi.MoshiConverterFactory
+import ru.unisafe.data.network.URL
+import ru.unisafe.data.auth.AuthAPI
+import javax.inject.Singleton
+
+@Module
+@InstallIn(SingletonComponent::class)
+class NetworkProvider {
+
+    @Provides
+    @Singleton
+    fun provideMoshi(): Moshi {
+        return Moshi.Builder().addLast(KotlinJsonAdapterFactory()).build()
+    }
+
+    @Provides
+    @Singleton
+    fun provideRetrofit(moshi: Moshi): Retrofit {
+        return Retrofit.Builder()
+            .addConverterFactory(MoshiConverterFactory.create(moshi))
+            .baseUrl(URL)
+            .build()
+    }
+
+    @Provides
+    @Singleton
+    fun provideAuthAPI(retrofit: Retrofit) : AuthAPI {
+        return retrofit.create(AuthAPI::class.java)
+    }
+
+}

@@ -56,14 +56,16 @@ class AuthScreenViewModel @Inject constructor(
     private fun verifyKey() = viewModelScope.launch {
         isInProgress.value = true
         if (isKeyVerified.value) saveKey()
-        else
+        else {
             try {
                 isKeyVerified.value = isKeyCorrectUseCase.isKeyCorrect(key.value)
                 isKeyIncorrect.value = !isKeyVerified.value
+                if (isKeyVerified.value) saveKey()
             } catch (ex: Exception) { //todo
                 throw ex
             }
-        if (isKeyVerified.value) saveKey()
+        }
+        isInProgress.value = false
     }
 
     private fun saveKey() = viewModelScope.launch {

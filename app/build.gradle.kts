@@ -52,6 +52,10 @@ android {
     }
 }
 
+hilt {
+    enableAggregatingTask = true
+}
+
 dependencies {
 
     implementation(libs.core.ktx)
@@ -76,4 +80,5 @@ dependencies {
     implementation(libs.navigation.compose)
 
     implementation(project(":features:auth"))
+    implementation(project(":data"))
 }
