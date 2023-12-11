@@ -4,9 +4,9 @@ import okhttp3.ResponseBody
 import retrofit2.http.GET
 import retrofit2.http.POST
 import retrofit2.http.Query
-import ru.unisafe.data.network.CREATE_SHOPPING_LIST
-import ru.unisafe.data.network.GET_ALL_SHOPPING_LISTS
-import ru.unisafe.data.network.REMOVE_SHOPPING_LIST
+import ru.unisafe.data.network.retrofit.CREATE_SHOPPING_LIST
+import ru.unisafe.data.network.retrofit.GET_ALL_SHOPPING_LISTS
+import ru.unisafe.data.network.retrofit.REMOVE_SHOPPING_LIST
 
 interface ShoppingListsAPI {
 

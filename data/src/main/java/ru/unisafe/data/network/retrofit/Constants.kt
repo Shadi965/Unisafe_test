@@ -1,4 +1,4 @@
-package ru.unisafe.data.network
+package ru.unisafe.data.network.retrofit
 
 internal const val URL = "https://cyberprot.ru/shopping/v2/"
 

@@ -8,8 +8,7 @@ import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
 import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
-import ru.unisafe.data.network.URL
-import ru.unisafe.data.auth.AuthAPI
+import ru.unisafe.data.network.retrofit.URL
 import javax.inject.Singleton
 
 @Module
@@ -30,11 +29,4 @@ class NetworkProvider {
             .baseUrl(URL)
             .build()
     }
-
-    @Provides
-    @Singleton
-    fun provideAuthAPI(retrofit: Retrofit) : AuthAPI {
-        return retrofit.create(AuthAPI::class.java)
-    }
-
 }

@@ -4,12 +4,12 @@ import okhttp3.ResponseBody
 import retrofit2.http.GET
 import retrofit2.http.POST
 import retrofit2.http.Query
-import ru.unisafe.data.network.ADD_ITEM_TO_SHOPPING_LIST
-import ru.unisafe.data.network.CROSS_ITEM_OFF
-import ru.unisafe.data.network.GET_SHOPPING_LIST
-import ru.unisafe.data.network.REMOVE_ITEM_FROM_LIST
+import ru.unisafe.data.network.retrofit.ADD_ITEM_TO_SHOPPING_LIST
+import ru.unisafe.data.network.retrofit.CROSS_ITEM_OFF
+import ru.unisafe.data.network.retrofit.GET_SHOPPING_LIST
+import ru.unisafe.data.network.retrofit.REMOVE_ITEM_FROM_LIST
 
-interface ProductAPI {
+interface ProductsAPI {
 
     /**
      * Принимает id списка

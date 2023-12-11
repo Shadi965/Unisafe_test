@@ -3,8 +3,8 @@ package ru.unisafe.data.auth
 import okhttp3.ResponseBody
 import retrofit2.http.POST
 import retrofit2.http.Query
-import ru.unisafe.data.network.AUTHENTICATION
-import ru.unisafe.data.network.CREATE_TEST_KEY
+import ru.unisafe.data.network.retrofit.AUTHENTICATION
+import ru.unisafe.data.network.retrofit.CREATE_TEST_KEY
 
 interface AuthAPI {
 
