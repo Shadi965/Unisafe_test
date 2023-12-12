@@ -2,10 +2,12 @@ package ru.unisafe.data
 
 interface KeyDataRepository {
 
-    fun getDefaultKey(): String
+    fun getDefaultKey(): String = "92EGHS"
 
-    fun saveKey(key: String)
+    suspend fun getLastKey(): String?
 
-    fun removeKey()
+    suspend fun saveKey(key: String)
+
+    suspend fun removeKey()
 
 }
