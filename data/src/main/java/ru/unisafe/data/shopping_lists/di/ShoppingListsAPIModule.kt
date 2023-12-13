@@ -9,7 +9,7 @@ import ru.unisafe.data.shopping_lists.ShoppingListsAPI
 
 @Module
 @InstallIn(SingletonComponent::class)
-class ShoppingListsAPI_Module {
+class ShoppingListsAPIModule {
 
     @Provides
     fun provideShoppingListAPI(retrofit: Retrofit): ShoppingListsAPI {

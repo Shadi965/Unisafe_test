@@ -23,6 +23,7 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         setContent {
             val navController = rememberNavController()
+            viewModel.getNavigator().register(navController)
             val currentKey by viewModel.currentKey
             UnisafeTestTheme {
                 Surface(
@@ -31,17 +32,17 @@ class MainActivity : ComponentActivity() {
                 ) {
                     if(currentKey == null)
                         viewModel.getNavigator()
-                            .Register(navController = navController, startDestination = Screen.Auth.route)
+                            .AddNavHost(startDestination = Screen.Auth.route)
                     else
                         viewModel.getNavigator()
-                            .Register(navController = navController, startDestination = Screen.ShoppingLists.route)
+                            .AddNavHost(startDestination = Screen.ShoppingLists.route)
                 }
             }
         }
     }
 
-    override fun onStop() {
-        super.onStop()
+    override fun onDestroy() {
+        super.onDestroy()
         viewModel.getNavigator().unRegister()
     }
 }

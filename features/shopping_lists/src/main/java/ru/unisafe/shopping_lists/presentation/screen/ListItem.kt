@@ -40,7 +40,7 @@ fun ListItem(
         )
         .padding(8.dp)
     if (item.isChecked)
-        layoutModifier = layoutModifier.alpha(0.3f)
+        layoutModifier = layoutModifier.alpha(0.5f)
     layoutModifier = if (!checkedMode)
         layoutModifier.combinedClickable(
             onLongClick = { viewModel.checkTheList(list.id) },

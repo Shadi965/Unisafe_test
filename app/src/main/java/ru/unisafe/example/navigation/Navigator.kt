@@ -48,11 +48,14 @@ object Navigator {
         }
     }
 
-    @Composable
-    fun Register(navController: NavHostController, startDestination: String) {
+    fun register(navController: NavHostController) {
         this.navController = navController
+    }
+
+    @Composable
+    fun AddNavHost(startDestination: String) {
         NavHost(
-            navController = navController,
+            navController = navController!!,
             startDestination = startDestination,
             builder = navGraph
         )

@@ -7,6 +7,8 @@ import retrofit2.http.Query
 import ru.unisafe.data.network.retrofit.CREATE_SHOPPING_LIST
 import ru.unisafe.data.network.retrofit.GET_ALL_SHOPPING_LISTS
 import ru.unisafe.data.network.retrofit.REMOVE_SHOPPING_LIST
+import ru.unisafe.data.shopping_lists.entities.CreateShoppingListResponse
+import ru.unisafe.data.shopping_lists.entities.GetAllShoppingListsResponse
 
 interface ShoppingListsAPI {
 
@@ -43,7 +45,7 @@ interface ShoppingListsAPI {
     suspend fun createShoppingList(
         @Query("key") key: String,
         @Query("name") name: String
-    ): ResponseBody
+    ): CreateShoppingListResponse
 
     /**
      * Принимает id списка в аргументах
@@ -116,6 +118,6 @@ interface ShoppingListsAPI {
      * Content-Type: application/json
      */
     @GET(GET_ALL_SHOPPING_LISTS)
-    suspend fun getAllShoppingLists(@Query("key") key: String): ResponseBody
+    suspend fun getAllShoppingLists(@Query("key") key: String): GetAllShoppingListsResponse
 
 }

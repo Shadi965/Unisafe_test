@@ -3,6 +3,7 @@ package ru.unisafe.data.room.shopping_lists
 import androidx.room.Dao
 import androidx.room.Delete
 import androidx.room.Insert
+import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import kotlinx.coroutines.flow.Flow
 
@@ -15,7 +16,7 @@ interface ShoppingListsDao {
     @Delete(entity = ShoppingListDbEntity::class)
     suspend fun deleteShoppingListById(shoppingListDeleteTuple: ShoppingListDeleteTuple)
 
-    @Insert
+    @Insert(onConflict = OnConflictStrategy.IGNORE)
     suspend fun addShoppingList(shoppingListDbEntity: ShoppingListDbEntity)
 
 }

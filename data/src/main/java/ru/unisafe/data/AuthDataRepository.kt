@@ -6,4 +6,6 @@ interface AuthDataRepository {
 
     suspend fun verifyKey(key: String): Boolean
 
+    suspend fun logout()
+
 }

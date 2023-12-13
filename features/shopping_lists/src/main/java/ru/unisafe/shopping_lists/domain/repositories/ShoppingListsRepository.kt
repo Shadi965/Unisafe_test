@@ -5,8 +5,10 @@ import ru.unisafe.shopping_lists.domain.entities.ShoppingList
 
 interface ShoppingListsRepository {
 
-    suspend fun deleteShoppingList(listId: Int)
+    suspend fun getShoppingListsByKey(key: String): Flow<List<ShoppingList>?>
 
-    fun getShoppingListsByKey(key: String): Flow<List<ShoppingList>?>
+    suspend fun createShoppingList(name: String)
+
+    suspend fun deleteShoppingList(listId: Int)
 
 }

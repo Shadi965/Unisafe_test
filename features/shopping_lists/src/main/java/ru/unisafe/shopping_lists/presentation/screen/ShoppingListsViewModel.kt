@@ -26,16 +26,13 @@ class ShoppingListsViewModel @Inject constructor(
     private val logoutUseCase: LogoutUseCase
 ) : ViewModel() {
 
-    private val _list = MutableStateFlow<List<ShoppingList>>(emptyList())
+    private val _list = MutableStateFlow<List<ShoppingList>?>(null)
 
     private val _currentKey = MutableStateFlow<String>("")
     val currentKey: StateFlow<String> = _currentKey
 
     private val _isCheckedAll = MutableStateFlow<Boolean>(false)
     val isCheckedAll: StateFlow<Boolean> = _isCheckedAll
-
-    private val _isInLoading = MutableStateFlow(true)
-    val isInLoading: StateFlow<Boolean> = _isInLoading
 
     private val _checkedMode = MutableStateFlow(false)
     val checkedMode: StateFlow<Boolean> = _checkedMode
@@ -44,7 +41,7 @@ class ShoppingListsViewModel @Inject constructor(
 
     private val inProgressListsIds = MutableStateFlow<Set<Int>>(emptySet())
 
-    val list: Flow<List<ShoppingListView>> = combine(
+    val list: Flow<List<ShoppingListView>?> = combine(
         _list,
         _isCheckedListsIds,
         inProgressListsIds,
@@ -52,22 +49,23 @@ class ShoppingListsViewModel @Inject constructor(
     )
 
     init {
-        _isInLoading.value = true
         viewModelScope.launch {
             launch {
                 _currentKey.value = getCurrentKeyUseCase.getCurrentKey()
             }
             launch {
-                list.collect{
-                    if (it.isNotEmpty())
-                        _isInLoading.value = false
-                }
                 _isCheckedListsIds.collect{
-                    _checkedMode.value = it.isEmpty()
+                    _checkedMode.value = it.isNotEmpty()
+                    var isContainedAll: Boolean = true
+                    _list.value?.forEach { list ->
+                        if (!it.contains(list.id))
+                            isContainedAll = false
+                    }
+                    _isCheckedAll.value = isContainedAll
                 }
             }
             getShoppingListsUseKeys.getShoppingLists().collect {
-                _list.emit(it ?: emptyList())
+                _list.emit(it)
             }
         }
     }
@@ -86,13 +84,12 @@ class ShoppingListsViewModel @Inject constructor(
     fun checkAllLists() {
         val set =  _isCheckedListsIds.value.toMutableSet()
         if (!_isCheckedAll.value)
-            _list.value.forEach {
+            _list.value?.forEach {
                 set.add(it.id)
             }
         else
             set.clear()
         _isCheckedListsIds.value = set
-        _isCheckedAll.value = !_isCheckedAll.value
     }
 
     fun deleteList(listId: Int) {
@@ -126,11 +123,11 @@ class ShoppingListsViewModel @Inject constructor(
     }
 
     private fun updateListFlow(
-        shoppingLists: List<ShoppingList>,
+        shoppingLists: List<ShoppingList>?,
         checkedLists: Set<Int>,
         inProgressLists: Set<Int>
-    ): List<ShoppingListView> {
-        return shoppingLists.map {
+    ): List<ShoppingListView>? {
+        return shoppingLists?.map {
             ShoppingListView(
                 list = it,
                 isChecked = checkedLists.contains(it.id),
