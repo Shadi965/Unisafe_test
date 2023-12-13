@@ -1,14 +1,14 @@
-package ru.unisafe.data.shopping_lists
+package ru.unisafe.data.retrofit.shoping_lists
 
 import okhttp3.ResponseBody
 import retrofit2.http.GET
 import retrofit2.http.POST
 import retrofit2.http.Query
-import ru.unisafe.data.network.retrofit.CREATE_SHOPPING_LIST
-import ru.unisafe.data.network.retrofit.GET_ALL_SHOPPING_LISTS
-import ru.unisafe.data.network.retrofit.REMOVE_SHOPPING_LIST
-import ru.unisafe.data.shopping_lists.entities.CreateShoppingListResponse
-import ru.unisafe.data.shopping_lists.entities.GetAllShoppingListsResponse
+import ru.unisafe.data.retrofit.CREATE_SHOPPING_LIST
+import ru.unisafe.data.retrofit.GET_ALL_SHOPPING_LISTS
+import ru.unisafe.data.retrofit.REMOVE_SHOPPING_LIST
+import ru.unisafe.data.retrofit.shoping_lists.entities.CreateShoppingListResponse
+import ru.unisafe.data.retrofit.shoping_lists.entities.GetAllShoppingListsResponse
 
 interface ShoppingListsAPI {
 

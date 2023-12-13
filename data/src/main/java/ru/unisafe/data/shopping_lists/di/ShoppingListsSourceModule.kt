@@ -4,8 +4,8 @@ import dagger.Binds
 import dagger.Module
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
-import ru.unisafe.data.shopping_lists.source.ShoppingListsSource
-import ru.unisafe.data.shopping_lists.source.ShoppingListsSourceRetrofitImpl
+import ru.unisafe.data.shopping_lists.ShoppingListsSource
+import ru.unisafe.data.retrofit.ShoppingListsSourceRetrofitImpl
 
 @Module
 @InstallIn(SingletonComponent::class)

@@ -1,4 +1,4 @@
-package ru.unisafe.data.shopping_lists.entities
+package ru.unisafe.data.retrofit.shoping_lists.entities
 
 import com.squareup.moshi.Json
 

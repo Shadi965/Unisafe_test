@@ -1,11 +1,9 @@
-package ru.unisafe.data
+package ru.unisafe.data.auth
 
-interface AuthDataRepository {
+interface AuthSource {
 
     suspend fun getNewKey(): String
 
     suspend fun verifyKey(key: String): Boolean
-
-    suspend fun logout()
 
 }

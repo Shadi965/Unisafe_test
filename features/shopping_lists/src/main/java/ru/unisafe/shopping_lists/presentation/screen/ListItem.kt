@@ -25,7 +25,9 @@ fun ListItem(
     viewModel: ShoppingListsViewModel,
     checkedMode: Boolean
 ) {
+
     val list = item.list
+
     var layoutModifier = Modifier
         .fillMaxWidth()
         .padding(8.dp)
@@ -38,20 +40,27 @@ fun ListItem(
                 )
             ), shape = RectangleShape
         )
-        .padding(8.dp)
-    if (item.isChecked)
-        layoutModifier = layoutModifier.alpha(0.5f)
+
     layoutModifier = if (!checkedMode)
         layoutModifier.combinedClickable(
             onLongClick = { viewModel.checkTheList(list.id) },
             onClick = { viewModel.openProductsScreen(list.id) }
         )
     else layoutModifier.clickable { viewModel.checkTheList(list.id) }
+
+    layoutModifier = layoutModifier.padding(8.dp)
+
+    if (item.isChecked)
+        layoutModifier = layoutModifier.alpha(0.5f)
+
     ConstraintLayout(modifier = layoutModifier) {
+
         val (name, date, id) = createRefs()
+
         Text(text = list.name, fontSize = 24.sp,
             modifier = Modifier.constrainAs(name) {}
         )
+
         Text(text = list.createdAt, fontSize = 16.sp,
             modifier = Modifier
                 .constrainAs(date) {
@@ -59,6 +68,7 @@ fun ListItem(
                 }
                 .padding(top = 4.dp)
         )
+
         Text(text = "Id: ${list.id}", fontSize = 20.sp,
             modifier = Modifier.constrainAs(id) {
                 end.linkTo(parent.end)

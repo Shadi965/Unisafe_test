@@ -1,13 +1,13 @@
-package ru.unisafe.data.products
+package ru.unisafe.data.retrofit.products
 
 import okhttp3.ResponseBody
 import retrofit2.http.GET
 import retrofit2.http.POST
 import retrofit2.http.Query
-import ru.unisafe.data.network.retrofit.ADD_ITEM_TO_SHOPPING_LIST
-import ru.unisafe.data.network.retrofit.CROSS_ITEM_OFF
-import ru.unisafe.data.network.retrofit.GET_SHOPPING_LIST
-import ru.unisafe.data.network.retrofit.REMOVE_ITEM_FROM_LIST
+import ru.unisafe.data.retrofit.ADD_ITEM_TO_SHOPPING_LIST
+import ru.unisafe.data.retrofit.CROSS_ITEM_OFF
+import ru.unisafe.data.retrofit.GET_SHOPPING_LIST
+import ru.unisafe.data.retrofit.REMOVE_ITEM_FROM_LIST
 
 interface ProductsAPI {
 

@@ -1,10 +1,11 @@
-package ru.unisafe.data.auth
+package ru.unisafe.data.retrofit.auth
 
 import okhttp3.ResponseBody
 import retrofit2.http.POST
 import retrofit2.http.Query
-import ru.unisafe.data.network.retrofit.AUTHENTICATION
-import ru.unisafe.data.network.retrofit.CREATE_TEST_KEY
+import ru.unisafe.data.retrofit.AUTHENTICATION
+import ru.unisafe.data.retrofit.CREATE_TEST_KEY
+import ru.unisafe.data.retrofit.auth.entities.AuthResponse
 
 interface AuthAPI {
 
@@ -50,7 +51,7 @@ interface AuthAPI {
      * @exception retrofit2.HttpException
      */
     @POST(AUTHENTICATION)
-    suspend fun authentication(@Query("key") key: String)
+    suspend fun authentication(@Query("key") key: String): AuthResponse
 
 
 

@@ -1,13 +1,15 @@
-package ru.unisafe.data.auth.source
+package ru.unisafe.data.retrofit
 
 import retrofit2.HttpException
-import ru.unisafe.data.auth.AuthAPI
+import ru.unisafe.data.auth.AuthSource
+import ru.unisafe.data.retrofit.auth.AuthAPI
 import javax.inject.Inject
 import javax.inject.Singleton
 
 @Singleton
 class AuthSourceRetrofitImpl @Inject constructor(
     private val authAPI: AuthAPI
+
 ): AuthSource {
     override suspend fun getNewKey(): String = authAPI.createTestKey().string()
 

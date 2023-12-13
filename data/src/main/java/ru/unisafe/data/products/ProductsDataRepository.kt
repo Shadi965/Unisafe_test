@@ -1,4 +1,4 @@
-package ru.unisafe.data
+package ru.unisafe.data.products
 
 interface ProductsDataRepository {
 }

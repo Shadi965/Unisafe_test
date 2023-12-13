@@ -12,3 +12,7 @@ data class ShoppingListGetTuple(
 data class ShoppingListDeleteTuple(
     val id: Int
 )
+
+data class ShoppingListsDeleteByKeyTuple(
+    val key: String
+)

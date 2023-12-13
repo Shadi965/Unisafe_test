@@ -1,8 +1,8 @@
-package ru.unisafe.data.shopping_lists.source
+package ru.unisafe.data.retrofit
 
-import retrofit2.Retrofit
-import ru.unisafe.data.shopping_lists.ShoppingListsAPI
-import ru.unisafe.data.shopping_lists.entities.ShoppingListDTO
+import ru.unisafe.data.retrofit.shoping_lists.ShoppingListsAPI
+import ru.unisafe.data.retrofit.shoping_lists.entities.ShoppingListDTO
+import ru.unisafe.data.shopping_lists.ShoppingListsSource
 import javax.inject.Inject
 import javax.inject.Singleton
 

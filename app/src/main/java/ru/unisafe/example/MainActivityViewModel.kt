@@ -2,14 +2,11 @@ package ru.unisafe.example
 
 import androidx.compose.runtime.State
 import androidx.compose.runtime.mutableStateOf
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.async
 import kotlinx.coroutines.launch
-import ru.unisafe.data.KeyDataRepository
+import ru.unisafe.data.auth.KeyDataRepository
 import ru.unisafe.example.navigation.Navigator
 import javax.inject.Inject
 

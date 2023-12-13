@@ -1,4 +1,4 @@
-package ru.unisafe.data.network.retrofit.di
+package ru.unisafe.data.retrofit.di
 
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
@@ -8,12 +8,12 @@ import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
 import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
-import ru.unisafe.data.network.retrofit.URL
+import ru.unisafe.data.retrofit.URL
 import javax.inject.Singleton
 
 @Module
 @InstallIn(SingletonComponent::class)
-class NetworkProvider {
+class NetworkModule {
 
     @Provides
     @Singleton

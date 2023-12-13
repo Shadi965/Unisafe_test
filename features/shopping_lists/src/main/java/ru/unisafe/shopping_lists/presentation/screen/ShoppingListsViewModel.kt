@@ -41,6 +41,9 @@ class ShoppingListsViewModel @Inject constructor(
 
     private val inProgressListsIds = MutableStateFlow<Set<Int>>(emptySet())
 
+    private val _isInLoading = MutableStateFlow<Boolean>(true)
+    val isInLoading: StateFlow<Boolean> = _isInLoading
+
     val list: Flow<List<ShoppingListView>?> = combine(
         _list,
         _isCheckedListsIds,
@@ -49,6 +52,7 @@ class ShoppingListsViewModel @Inject constructor(
     )
 
     init {
+        _isInLoading.value = true
         viewModelScope.launch {
             launch {
                 _currentKey.value = getCurrentKeyUseCase.getCurrentKey()
@@ -66,6 +70,7 @@ class ShoppingListsViewModel @Inject constructor(
             }
             getShoppingListsUseKeys.getShoppingLists().collect {
                 _list.emit(it)
+                _isInLoading.value = false
             }
         }
     }
@@ -114,6 +119,14 @@ class ShoppingListsViewModel @Inject constructor(
 
     fun openProductsScreen(listId: Int) {
         router.openProductsScreen(listId)
+    }
+
+    fun loadAgain() {
+        _isInLoading.value = true
+        viewModelScope.launch {
+            getShoppingListsUseKeys.getShoppingLists()
+            _isInLoading.value = false
+        }
     }
 
     fun logout() {

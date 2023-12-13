@@ -16,6 +16,9 @@ interface ShoppingListsDao {
     @Delete(entity = ShoppingListDbEntity::class)
     suspend fun deleteShoppingListById(shoppingListDeleteTuple: ShoppingListDeleteTuple)
 
+    @Delete(entity = ShoppingListDbEntity::class)
+    suspend fun deleteShoppingListsByKey(shoppingListsDeleteByKeyTuple: ShoppingListsDeleteByKeyTuple)
+
     @Insert(onConflict = OnConflictStrategy.IGNORE)
     suspend fun addShoppingList(shoppingListDbEntity: ShoppingListDbEntity)
 

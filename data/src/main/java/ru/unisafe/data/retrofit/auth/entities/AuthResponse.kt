@@ -1,8 +1,8 @@
-package ru.unisafe.data.auth.entities
+package ru.unisafe.data.retrofit.auth.entities
 
 import com.squareup.moshi.Json
 
-data class AuthStatus(
+data class AuthResponse(
     @Json(name = "success")
     val status: Boolean,
     val error: String?

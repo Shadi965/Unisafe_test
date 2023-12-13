@@ -2,7 +2,7 @@ package ru.unisafe.example.glue.shopping_lists
 
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
-import ru.unisafe.data.ShoppingListsDataRepository
+import ru.unisafe.data.shopping_lists.ShoppingListsDataRepository
 import ru.unisafe.shopping_lists.domain.entities.ShoppingList
 import ru.unisafe.shopping_lists.domain.repositories.ShoppingListsRepository
 import javax.inject.Inject

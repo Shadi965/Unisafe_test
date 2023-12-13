@@ -1,7 +1,7 @@
 package ru.unisafe.example.glue.auth
 
 import ru.unisafe.auth.domain.repositories.KeyRepository
-import ru.unisafe.data.KeyDataRepository
+import ru.unisafe.data.auth.KeyDataRepository
 import javax.inject.Inject
 import javax.inject.Singleton
 
