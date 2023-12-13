@@ -12,8 +12,8 @@ class AuthRouterImpl @Inject constructor(
 ) : AuthRouter {
     override fun openShoppingListsScreen() {
         navigator {
-            navigate(Screen.ShoppingLists) {
-                popUpTo(Screen.Auth){
+            navigate(Screen.ShoppingLists.route) {
+                popUpTo(Screen.Auth.route){
                     inclusive = true
                 }
             }

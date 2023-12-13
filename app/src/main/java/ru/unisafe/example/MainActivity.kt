@@ -7,21 +7,12 @@ import androidx.activity.viewModels
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
-import androidx.compose.material3.Text
-import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.navigation.compose.rememberNavController
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.launch
-import ru.unisafe.data.KeyDataRepository
-import ru.unisafe.example.navigation.Navigator
 import ru.unisafe.example.navigation.Screen
 import ru.unisafe.example.ui.theme.UnisafeTestTheme
-import javax.inject.Inject
-import javax.inject.Singleton
 
 @AndroidEntryPoint
 class MainActivity : ComponentActivity() {
@@ -40,10 +31,10 @@ class MainActivity : ComponentActivity() {
                 ) {
                     if(currentKey == null)
                         viewModel.getNavigator()
-                            .Register(navController = navController, startDestination = Screen.Auth)
+                            .Register(navController = navController, startDestination = Screen.Auth.route)
                     else
                         viewModel.getNavigator()
-                            .Register(navController = navController, startDestination = Screen.ShoppingLists)
+                            .Register(navController = navController, startDestination = Screen.ShoppingLists.route)
                 }
             }
         }

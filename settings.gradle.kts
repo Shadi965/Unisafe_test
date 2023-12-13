@@ -17,3 +17,4 @@ rootProject.name = "Unisafe Test"
 include(":app")
 include(":features:auth")
 include(":data")
+include(":features:shopping_lists")

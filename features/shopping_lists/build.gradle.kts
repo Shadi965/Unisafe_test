@@ -1,5 +1,5 @@
 plugins {
-    alias(libs.plugins.androidApplication)
+    alias(libs.plugins.androidLibrary)
     alias(libs.plugins.kotlinAndroid)
 
     alias(libs.plugins.ksp)
@@ -7,17 +7,14 @@ plugins {
 }
 
 android {
-    namespace = "ru.unisafe.example"
+    namespace = "ru.unisafe.shopping_lists"
     compileSdk = 34
 
     defaultConfig {
-        applicationId = "ru.unisafe.example"
         minSdk = 24
-        targetSdk = 34
-        versionCode = 1
-        versionName = "1.0"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+        consumerProguardFiles("consumer-rules.pro")
         vectorDrawables {
             useSupportLibrary = true
         }
@@ -52,13 +49,11 @@ android {
     }
 }
 
-hilt {
-    enableAggregatingTask = true
-}
-
 dependencies {
 
     implementation(libs.core.ktx)
+    implementation(libs.appcompat)
+    implementation(libs.material)
     implementation(libs.lifecycle.runtime.ktx)
     implementation(libs.activity.compose)
     implementation(platform(libs.compose.bom))
@@ -75,12 +70,9 @@ dependencies {
     debugImplementation(libs.ui.test.manifest)
 
     implementation(libs.viewmodel.compose)
-    implementation(libs.navigation.compose)
+    implementation(libs.androidx.constraintlayout.compose)
 
     implementation(libs.hilt.android)
     ksp(libs.hilt.android.compiler)
-
-    implementation(project(":data"))
-    implementation(project(":features:auth"))
-    implementation(project(":features:shopping_lists"))
+    implementation(libs.androidx.hilt.navigation.compose)
 }

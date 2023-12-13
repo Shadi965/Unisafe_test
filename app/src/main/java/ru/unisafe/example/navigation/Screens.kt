@@ -2,10 +2,18 @@ package ru.unisafe.example.navigation
 
 import kotlin.reflect.KProperty
 
-object Screen {
+sealed class Screen(
+    val route: String,
+    private val arguments: String = ""
+) {
 
-    const val Auth = "auth_screen"
+    val withArgument: String
+        get() = route + arguments
 
-    const val ShoppingLists = "shopping_lists_screen"
+    object Auth : Screen("auth_screen/")
+
+    object ShoppingLists : Screen("shopping_lists_screen/")
+
+    object Products : Screen("products_screen/", "{id}")
 
 }
