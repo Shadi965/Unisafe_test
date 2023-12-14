@@ -3,6 +3,7 @@ package ru.unisafe.data.room
 import android.annotation.SuppressLint
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
@@ -14,8 +15,11 @@ import ru.unisafe.data.room.shopping_lists.ShoppingListsDeleteByKeyTuple
 import ru.unisafe.data.retrofit.shoping_lists.entities.ShoppingListDTO
 import ru.unisafe.data.shopping_lists.ShoppingListsDataRepository
 import ru.unisafe.data.shopping_lists.ShoppingListsSource
+import java.io.IOException
 import java.text.SimpleDateFormat
 import java.util.Date
+import java.util.Locale
+import java.util.TimeZone
 import javax.inject.Inject
 import javax.inject.Singleton
 
@@ -25,20 +29,38 @@ class ShoppingListsRepositoryRoomImpl @Inject constructor(
     private val shoppingListsSource: ShoppingListsSource,
     private val keyDataRepository: KeyDataRepository
 ) : ShoppingListsDataRepository {
-    override suspend fun getAllShoppingLists(key: String): Flow<List<ShoppingListDTO>?> = withContext(Dispatchers.IO) {
-        launch {
-            val list = shoppingListsSource.getAllShoppingLists(key)
-            shoppingListsDao.deleteShoppingListsByKey(ShoppingListsDeleteByKeyTuple(key))
-            list.forEach {
-                shoppingListsDao.addShoppingList(
-                    ShoppingListDbEntity(
-                        key = key,
-                        id = it.id,
-                        name = it.name,
-                        createdAt = it.createdAt
-                    )
+
+    private suspend fun updateDb(key: String) {
+        val netList = shoppingListsSource.getAllShoppingLists(key)
+        val netListsIds = netList.map { it.id }.toSet()
+        val dbListsIds = shoppingListsDao.getShoppingListsByKey(key).first()?.map { it.id }?.toSet() ?: emptySet()
+
+        val toBeAddedListsIds = netListsIds.toMutableSet().apply { removeAll(dbListsIds) }
+        val toBeDeletedListsIds = dbListsIds.toMutableSet().apply { removeAll(netListsIds) }
+
+        val toBeAddedLists = netList.filter {
+            toBeAddedListsIds.contains(it.id)
+        }
+
+        toBeDeletedListsIds.forEach {
+            shoppingListsDao.deleteShoppingListById(ShoppingListDeleteTuple(it)) }
+        toBeAddedLists.forEach {
+            shoppingListsDao.addShoppingList(
+                ShoppingListDbEntity(
+                    key = key,
+                    id = it.id,
+                    name = it.name,
+                    createdAt = it.createdAt
                 )
-            }
+            )
+        }
+    }
+
+    override suspend fun getAllShoppingLists(key: String): Flow<List<ShoppingListDTO>?> = withContext(Dispatchers.IO) {
+        try {
+            updateDb(key)
+        } catch (e: IOException) {
+            //todo
         }
         return@withContext shoppingListsDao.getShoppingListsByKey(key).map {
             it?.map { list ->
@@ -54,8 +76,17 @@ class ShoppingListsRepositoryRoomImpl @Inject constructor(
     @SuppressLint("SimpleDateFormat")
     override suspend fun createShoppingList(name: String) {
         val key = keyDataRepository.getLastKey() ?: throw IllegalStateException() //todo
-        val newListId = shoppingListsSource.createShoppingList(key, name)
-        val currentTime = SimpleDateFormat("yyyy/MM/dd HH:mm:ss").format(Date(System.currentTimeMillis()))
+        val newListId = try {
+            shoppingListsSource.createShoppingList(key, name)
+        } catch (e: IOException) {
+            //todo
+            shoppingListsDao.getLastListIdByKey(key) + 1
+        }
+        val dateFormat = SimpleDateFormat("yyyy-MM-dd HH:mm:ss")
+        dateFormat.timeZone = TimeZone.getTimeZone("00:00")
+        val currentTime = dateFormat.format(Date(System.currentTimeMillis()))
+
+        //val currentTime = SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(Date(System.currentTimeMillis()))
         shoppingListsDao.addShoppingList(
             ShoppingListDbEntity(
                 key = key,
@@ -68,7 +99,11 @@ class ShoppingListsRepositoryRoomImpl @Inject constructor(
 
     override suspend fun removeShoppingList(listId: Int) = withContext(Dispatchers.IO) {
         launch {
-            shoppingListsSource.removeShoppingList(listId)
+            try {
+                shoppingListsSource.removeShoppingList(listId)
+            } catch (e: IOException) {
+                //todo
+            }
         }
         shoppingListsDao.deleteShoppingListById(ShoppingListDeleteTuple(listId))
     }

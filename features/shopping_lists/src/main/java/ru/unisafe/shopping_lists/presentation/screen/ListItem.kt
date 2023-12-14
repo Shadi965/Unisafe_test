@@ -23,12 +23,13 @@ import ru.unisafe.shopping_lists.domain.entities.ShoppingListView
 fun ListItem(
     item: ShoppingListView,
     viewModel: ShoppingListsViewModel,
-    checkedMode: Boolean
+    checkedMode: Boolean,
+    modifier: Modifier = Modifier
 ) {
 
     val list = item.list
 
-    var layoutModifier = Modifier
+    var layoutModifier = modifier
         .fillMaxWidth()
         .padding(8.dp)
         .border(

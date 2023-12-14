@@ -22,4 +22,7 @@ interface ShoppingListsDao {
     @Insert(onConflict = OnConflictStrategy.IGNORE)
     suspend fun addShoppingList(shoppingListDbEntity: ShoppingListDbEntity)
 
+    @Query("Select MAX(id) FROM shopping_lists WHERE `key` = :key")
+    suspend fun getLastListIdByKey(key: String): Int
+
 }

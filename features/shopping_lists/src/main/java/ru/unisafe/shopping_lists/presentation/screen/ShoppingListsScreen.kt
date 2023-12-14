@@ -1,5 +1,6 @@
 package ru.unisafe.shopping_lists.presentation.screen
 
+import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
@@ -13,14 +14,15 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.hilt.navigation.compose.hiltViewModel
 
-@OptIn(ExperimentalMaterial3Api::class)
+@OptIn(ExperimentalMaterial3Api::class, ExperimentalFoundationApi::class)
 @Composable
 fun ShoppingListsScreen() {
     val viewModel: ShoppingListsViewModel = hiltViewModel()
     val list by viewModel.list.collectAsState(emptyList())
     val checkedMode by viewModel.checkedMode.collectAsState()
     val scrollBehavior = TopAppBarDefaults.pinnedScrollBehavior()
-    Scaffold (
+    val showDialog by viewModel.showDialog
+    Scaffold(
         modifier = Modifier.nestedScroll(scrollBehavior.nestedScrollConnection),
         topBar = {
             if (!checkedMode)
@@ -28,15 +30,18 @@ fun ShoppingListsScreen() {
             else
                 ListChangedModeTopBar(viewModel = viewModel, scrollBehavior = scrollBehavior)
         },
-        content = {
+        content = { paddingValues ->
             LazyColumn(
-                Modifier.padding(top = it.calculateTopPadding()),
+                Modifier.padding(
+                    top = paddingValues.calculateTopPadding()
+                ),
                 userScrollEnabled = list != null
             ) {
                 if (list != null)
-                    items(list!!) {
+                    items(list!!, key = { it.list.id }) {
                         if (!it.isInDeleting)
                             ListItem(
+                                modifier = Modifier.animateItemPlacement(),
                                 item = it,
                                 viewModel = viewModel,
                                 checkedMode = checkedMode
@@ -49,4 +54,6 @@ fun ShoppingListsScreen() {
             }
         }
     )
+    if (showDialog)
+        ListCreateDialog(viewModel = viewModel)
 }

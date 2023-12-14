@@ -3,6 +3,7 @@ package ru.unisafe.data
 import ru.unisafe.data.auth.AuthDataRepository
 import ru.unisafe.data.auth.AuthSource
 import ru.unisafe.data.auth.KeyDataRepository
+import java.io.IOException
 import javax.inject.Inject
 import javax.inject.Singleton
 
@@ -13,11 +14,21 @@ class AuthDataRepositoryImpl @Inject constructor(
 ) : AuthDataRepository {
 
     override suspend fun getNewKey(): String {
-        return authSource.getNewKey()
+        return try {
+            authSource.getNewKey()
+        } catch (e: IOException) {
+            //todo
+            ""
+        }
     }
 
     override suspend fun verifyKey(key: String): Boolean {
-        return authSource.verifyKey(key)
+        return try {
+            authSource.verifyKey(key)
+        } catch (e: Exception) {
+            //todo
+            false
+        }
     }
 
     override suspend fun logout() {

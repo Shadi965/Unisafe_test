@@ -1,5 +1,6 @@
 package ru.unisafe.shopping_lists.presentation.screen
 
+import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -8,6 +9,7 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.launch
+import ru.unisafe.shopping_lists.domain.CreateShoppingListUseCase
 import ru.unisafe.shopping_lists.domain.DeleteShoppingListUseCase
 import ru.unisafe.shopping_lists.domain.GetCurrentKeyUseCase
 import ru.unisafe.shopping_lists.domain.GetShoppingListsUseKeys
@@ -23,8 +25,12 @@ class ShoppingListsViewModel @Inject constructor(
     private val deleteShoppingListUseCase: DeleteShoppingListUseCase,
     private val getShoppingListsUseKeys: GetShoppingListsUseKeys,
     private val getCurrentKeyUseCase: GetCurrentKeyUseCase,
+    private val createShoppingListUseCase: CreateShoppingListUseCase,
     private val logoutUseCase: LogoutUseCase
 ) : ViewModel() {
+
+    val showDialog = mutableStateOf(false)
+    val newListName = mutableStateOf("")
 
     private val _list = MutableStateFlow<List<ShoppingList>?>(null)
 
@@ -84,6 +90,13 @@ class ShoppingListsViewModel @Inject constructor(
             set.remove(listId)
             _isCheckedListsIds.value = set
         }
+    }
+
+    fun createNewList() {
+        viewModelScope.launch {
+            createShoppingListUseCase.createShoppingList(newListName.value)
+        }
+        newListName.value = ""
     }
 
     fun checkAllLists() {

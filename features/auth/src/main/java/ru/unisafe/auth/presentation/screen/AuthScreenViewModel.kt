@@ -40,8 +40,10 @@ class AuthScreenViewModel @Inject constructor(
     }
 
     fun sendKey(){
-        if (key.value.isBlank())
+        if (key.value.isBlank()) {
             getDefaultKey()
+            isKeyVerified.value = true
+        }
         else
             verifyKey()
 
