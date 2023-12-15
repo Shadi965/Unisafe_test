@@ -13,23 +13,11 @@ class AuthDataRepositoryImpl @Inject constructor(
     private val keyDataRepository: KeyDataRepository
 ) : AuthDataRepository {
 
-    override suspend fun getNewKey(): String {
-        return try {
-            authSource.getNewKey()
-        } catch (e: IOException) {
-            //todo
-            ""
-        }
-    }
+    override suspend fun getNewKey(): String =
+        authSource.getNewKey()
 
-    override suspend fun verifyKey(key: String): Boolean {
-        return try {
-            authSource.verifyKey(key)
-        } catch (e: Exception) {
-            //todo
-            false
-        }
-    }
+    override suspend fun verifyKey(key: String): Boolean =
+        authSource.verifyKey(key)
 
     override suspend fun logout() {
         keyDataRepository.removeKey()

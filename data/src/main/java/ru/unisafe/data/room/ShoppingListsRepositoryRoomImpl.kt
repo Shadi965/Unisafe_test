@@ -75,7 +75,7 @@ class ShoppingListsRepositoryRoomImpl @Inject constructor(
 
     @SuppressLint("SimpleDateFormat")
     override suspend fun createShoppingList(name: String) {
-        val key = keyDataRepository.getLastKey() ?: throw IllegalStateException() //todo
+        val key = keyDataRepository.getLastKey() ?: throw IllegalStateException()
         val newListId = try {
             shoppingListsSource.createShoppingList(key, name)
         } catch (e: IOException) {

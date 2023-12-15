@@ -40,7 +40,7 @@ class ProductsRepositoryRoomImpl @Inject constructor(
     override suspend fun addProductToList(listId: Int, productName: String, count: Int) {
         val productId = try {
             productsSource.addNewProductToList(listId, productName, count)
-        } catch (e: Exception) {
+        } catch (e: IOException) {
             //todo
             productsDao.getLastProductIdByList(listId)
         }

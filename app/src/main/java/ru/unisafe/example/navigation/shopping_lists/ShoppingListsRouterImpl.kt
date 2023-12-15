@@ -12,7 +12,7 @@ class ShoppingListsRouterImpl @Inject constructor(
 ) : ShoppingListsRouter {
     override fun openProductsScreen(listId: Int, listName: String) {
         navigator {
-            navigate(Screen.Products.route + listId + "/" + listName)
+            navigate(Screen.Products.route + listId + "/" + listName.ifBlank { "Безымянный список" })
         }
     }
 }

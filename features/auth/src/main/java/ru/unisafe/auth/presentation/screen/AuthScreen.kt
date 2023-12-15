@@ -8,7 +8,6 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Done
 import androidx.compose.material.icons.filled.KeyboardArrowRight
 import androidx.compose.material3.Button
 import androidx.compose.material3.CircularProgressIndicator
@@ -18,16 +17,14 @@ import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardCapitalization
 import androidx.compose.ui.text.style.TextAlign
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
@@ -40,13 +37,16 @@ fun AuthScreen() {
     var isKeyVerified by viewModel.isKeyVerified
     var isKeyIncorrect by viewModel.isKeyIncorrect
     val keyLength = 6
+    val focusManager = LocalFocusManager.current
+
     Column(
         modifier = Modifier.fillMaxSize(),
         verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.CenterHorizontally,
     ) {
         OutlinedTextField(
-            value = key, onValueChange = {
+            value = key,
+            onValueChange = {
                 if (it.length <= keyLength) key = it.uppercase()
                 isKeyVerified = false
                 isKeyIncorrect = false
@@ -55,34 +55,37 @@ fun AuthScreen() {
             enabled = !isInProgress,
             textStyle = TextStyle(fontSize = 24.sp),
             maxLines = 1,
-            keyboardOptions = KeyboardOptions(capitalization = KeyboardCapitalization.Characters, imeAction = ImeAction.Done),
-            keyboardActions = KeyboardActions(onDone = { if (!isKeyIncorrect) viewModel.sendKey() }),
+            keyboardOptions = KeyboardOptions(
+                capitalization = KeyboardCapitalization.Characters, imeAction = ImeAction.Done
+            ),
+            keyboardActions = KeyboardActions(onDone = {
+                if (!isKeyIncorrect) {
+                    viewModel.sendKey()
+                    focusManager.clearFocus()
+                }
+            }),
             label = {
                 Text(text = "Ключ доступа")
             },
             isError = isKeyIncorrect,
             trailingIcon = {
-                if (!isInProgress)
-                    IconButton(
-                        onClick = { viewModel.sendKey() },
-                        enabled = !isKeyIncorrect
-                    ) {
-                        Icon(
-                            imageVector = Icons.Filled.KeyboardArrowRight,
-                            contentDescription = "Send key"
-                        )
-                    }
-                else
-                    CircularProgressIndicator(modifier = Modifier.size(24.dp))
-            }
-        )
+                if (!isInProgress) IconButton(
+                    onClick = { viewModel.sendKey() }, enabled = !isKeyIncorrect
+                ) {
+                    Icon(
+                        imageVector = Icons.Filled.KeyboardArrowRight,
+                        contentDescription = "Send key"
+                    )
+                }
+                else CircularProgressIndicator(modifier = Modifier.size(24.dp))
+            })
+
         Button(
             onClick = { viewModel.getNewKey() },
             enabled = !isInProgress,
         ) {
             Text(
-                text = "Получить \nновый ключ",
-                textAlign = TextAlign.Center
+                text = "Получить \nновый ключ", textAlign = TextAlign.Center
             )
         }
     }

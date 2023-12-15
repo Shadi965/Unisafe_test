@@ -184,7 +184,6 @@ class ProductsViewModel @Inject constructor(
                     } catch (e: IOException) {
                         connectionError.value = true
                         break
-                        //todo
                     }
                 }
             }

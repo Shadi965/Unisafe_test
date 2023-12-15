@@ -10,7 +10,7 @@ class ShoppingListsKeyIntermediateRepositoryImpl @Inject constructor(
     private val keyDataRepository: KeyDataRepository
 ) : ShoppingListsKeyRepository {
     override suspend fun getCurrentKey(): String {
-        return keyDataRepository.getLastKey() ?: throw IllegalStateException() //todo
+        return keyDataRepository.getLastKey() ?: throw IllegalStateException()
     }
 
 }

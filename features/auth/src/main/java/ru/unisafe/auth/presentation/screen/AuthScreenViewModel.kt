@@ -28,25 +28,20 @@ class AuthScreenViewModel @Inject constructor(
 
     fun getNewKey() = viewModelScope.launch {
         isInProgress.value = true
-        try {
-            key.value = getNewKeyUseCase.getNewKey()
-            isKeyIncorrect.value = false
-            isKeyVerified.value = true
-        } catch (ex: Exception) { //todo
-            throw ex
-        } finally {
-            isInProgress.value = false
-        }
+        key.value = getNewKeyUseCase.getNewKey()
+        isKeyIncorrect.value = false
+        isKeyVerified.value = true
+        isInProgress.value = false
     }
 
     fun sendKey(){
-        if (key.value.isBlank()) {
-            getDefaultKey()
-            isKeyVerified.value = true
+        if (!isInProgress.value) {
+            if (key.value.isBlank()) {
+                getDefaultKey()
+                isKeyVerified.value = true
+            } else
+                verifyKey()
         }
-        else
-            verifyKey()
-
     }
 
     private fun getDefaultKey() = viewModelScope.launch {
@@ -59,13 +54,9 @@ class AuthScreenViewModel @Inject constructor(
         isInProgress.value = true
         if (isKeyVerified.value) saveKey()
         else {
-            try {
-                isKeyVerified.value = isKeyCorrectUseCase.isKeyCorrect(key.value)
-                isKeyIncorrect.value = !isKeyVerified.value
-                if (isKeyVerified.value) saveKey()
-            } catch (ex: Exception) { //todo
-                throw ex
-            }
+            isKeyVerified.value = isKeyCorrectUseCase.isKeyCorrect(key.value)
+            isKeyIncorrect.value = !isKeyVerified.value
+            if (isKeyVerified.value) saveKey()
         }
         isInProgress.value = false
     }

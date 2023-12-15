@@ -54,7 +54,8 @@ fun StubItem(brush: Brush) {
     ConstraintLayout(modifier = Modifier
         .fillMaxWidth()
         .padding(8.dp)
-        .background(brush)) {
+        .background(brush)
+        .padding(8.dp)) {
 
 
 
