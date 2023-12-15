@@ -47,7 +47,10 @@ fun ShoppingListsScreen() {
                         start = 16.dp
                     ))
         LazyColumn(
-            modifier = Modifier.padding(top = paddingValues.calculateTopPadding()),
+            modifier = Modifier.padding(
+                top = paddingValues.calculateTopPadding(),
+                bottom = paddingValues.calculateBottomPadding()
+            ),
             userScrollEnabled = list != null
         ) {
             if (list != null)

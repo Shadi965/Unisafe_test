@@ -7,8 +7,6 @@ import ru.unisafe.data.shopping_lists.ShoppingListsDataRepository
 import ru.unisafe.shopping_lists.domain.entities.ShoppingList
 import ru.unisafe.shopping_lists.domain.repositories.ShoppingListsRepository
 import java.text.SimpleDateFormat
-import java.time.LocalDateTime
-import java.util.Date
 import java.util.TimeZone
 import javax.inject.Inject
 import javax.inject.Singleton

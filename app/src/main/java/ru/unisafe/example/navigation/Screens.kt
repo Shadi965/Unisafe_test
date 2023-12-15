@@ -1,7 +1,6 @@
 package ru.unisafe.example.navigation
 
 import ru.unisafe.products.presentation.ProductsRouter
-import kotlin.reflect.KProperty
 
 sealed class Screen(
     val route: String,

@@ -20,7 +20,6 @@ import ru.unisafe.products.domain.entities.Product
 import ru.unisafe.products.domain.entities.ProductView
 import ru.unisafe.products.presentation.ProductsRouter
 import java.io.IOException
-import java.lang.NumberFormatException
 import javax.inject.Inject
 
 @HiltViewModel
