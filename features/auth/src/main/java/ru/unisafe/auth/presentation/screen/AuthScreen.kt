@@ -5,6 +5,7 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Done
@@ -23,6 +24,7 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.TextStyle
+import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardCapitalization
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
@@ -52,7 +54,9 @@ fun AuthScreen() {
             modifier = Modifier.padding(4.dp),
             enabled = !isInProgress,
             textStyle = TextStyle(fontSize = 24.sp),
-            keyboardOptions = KeyboardOptions(capitalization = KeyboardCapitalization.Characters),
+            maxLines = 1,
+            keyboardOptions = KeyboardOptions(capitalization = KeyboardCapitalization.Characters, imeAction = ImeAction.Done),
+            keyboardActions = KeyboardActions(onDone = { if (!isKeyIncorrect) viewModel.sendKey() }),
             label = {
                 Text(text = "Ключ доступа")
             },

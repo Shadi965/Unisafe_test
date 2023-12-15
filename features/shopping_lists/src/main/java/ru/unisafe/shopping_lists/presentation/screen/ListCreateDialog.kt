@@ -8,6 +8,7 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
@@ -16,6 +17,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.compose.ui.window.Dialog
@@ -37,7 +39,9 @@ fun ListCreateDialog(viewModel: ShoppingListsViewModel) {
                 modifier = Modifier.padding(vertical = 16.dp),
                 supportingText = {
                     Text(text = "Введите название списка")
-                }
+                },
+                maxLines = 1,
+                keyboardOptions = KeyboardOptions(imeAction = ImeAction.Done)
             )
             Row(
                 horizontalArrangement = Arrangement.End,

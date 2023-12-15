@@ -8,6 +8,7 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
@@ -16,6 +17,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -43,14 +45,18 @@ fun ProductAddDialog(viewModel: ProductsViewModel) {
             TextField(value = productName, onValueChange = { productName = it },
                 supportingText = {
                     Text(text = "Введите название товара")
-                }
+                },
+                maxLines = 1,
+                keyboardOptions = KeyboardOptions(imeAction = ImeAction.Done)
             )
             TextField(value = productCount, onValueChange = { productCount = it },
                 modifier = Modifier.padding(vertical = 16.dp).width(160.dp),
                 isError = fieldError,
                 supportingText = {
                     Text(text = "Введите количество")
-                }
+                },
+                maxLines = 1,
+                keyboardOptions = KeyboardOptions(imeAction = ImeAction.Done)
             )
             Row(
                 horizontalArrangement = Arrangement.End,
