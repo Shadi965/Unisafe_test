@@ -1,4 +1,4 @@
-# Ссылка на release версию apk подписанную debug ключом
+# Ссылка на release и debug версии apk подписанные debug ключом
 https://1drv.ms/f/s!AteblQhF6znLgrsLdUZPaQNrkV4bSw?e=7ApYGJ
 
 # Описание работы приложения 
