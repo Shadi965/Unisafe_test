@@ -13,6 +13,8 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.hilt.navigation.compose.hiltViewModel
+import ru.unisafe.shopping_lists.presentation.screen.list_item.ListItem
+import ru.unisafe.shopping_lists.presentation.screen.list_item.ShimmerAnimatedStubItem
 
 @OptIn(ExperimentalMaterial3Api::class, ExperimentalFoundationApi::class)
 @Composable
@@ -29,31 +31,28 @@ fun ShoppingListsScreen() {
                 ListTopBar(viewModel = viewModel, scrollBehavior = scrollBehavior)
             else
                 ListChangedModeTopBar(viewModel = viewModel, scrollBehavior = scrollBehavior)
-        },
-        content = { paddingValues ->
-            LazyColumn(
-                Modifier.padding(
-                    top = paddingValues.calculateTopPadding()
-                ),
-                userScrollEnabled = list != null
-            ) {
-                if (list != null)
-                    items(list!!, key = { it.list.id }) {
-                        if (!it.isInDeleting)
-                            ListItem(
-                                modifier = Modifier.animateItemPlacement(),
-                                item = it,
-                                viewModel = viewModel,
-                                checkedMode = checkedMode
-                            )
-                    }
-                else
-                    items(15) {
-                        ShimmerAnimatedStubItem()
-                    }
-            }
         }
-    )
+    ) { paddingValues ->
+        LazyColumn(
+            modifier = Modifier.padding(top = paddingValues.calculateTopPadding()),
+            userScrollEnabled = list != null
+        ) {
+            if (list != null)
+                items(list!!, key = { it.list.id }) {
+                    if (!it.isInDeleting)
+                        ListItem(
+                            modifier = Modifier.animateItemPlacement(),
+                            item = it,
+                            viewModel = viewModel,
+                            checkedMode = checkedMode
+                        )
+                }
+            else
+                items(15) {
+                    ShimmerAnimatedStubItem()
+                }
+        }
+    }
     if (showDialog)
         ListCreateDialog(viewModel = viewModel)
 }

@@ -6,6 +6,7 @@ import androidx.room.Insert
 import androidx.room.Query
 import androidx.room.Update
 import kotlinx.coroutines.flow.Flow
+import ru.unisafe.data.products.entity.Product
 
 @Dao
 interface ProductsDao {
@@ -22,5 +23,9 @@ interface ProductsDao {
     @Update(ProductDbEntity::class)
     suspend fun crossProductOff(productCrossOffTuple: ProductCrossOffTuple)
 
+    @Query("SELECT is_crossed FROM products WHERE shopping_list_id = :listId AND id = :productId")
+    suspend fun isProductCrossedOff(listId: Int, productId: Int): Boolean
 
+    @Query("SELECT MAX(id) FROM products WHERE shopping_list_id = :listId")
+    suspend fun getLastProductIdByList(listId: Int): Int
 }

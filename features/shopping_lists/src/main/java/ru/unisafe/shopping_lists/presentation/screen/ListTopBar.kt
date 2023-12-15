@@ -98,38 +98,3 @@ fun ListChangedModeTopBar(viewModel: ShoppingListsViewModel, scrollBehavior: Top
         }
     )
 }
-
-@OptIn(ExperimentalMaterial3Api::class)
-@Preview
-@Composable
-fun AppBarPreview() {
-    val isLoading: Boolean = true
-    TopAppBar(
-        title = {
-            Text(text = "Ключ")
-        },
-        actions = {
-            Box(modifier = Modifier.size(36.dp)) {
-                if (!isLoading)
-                    Icon(
-                        modifier = Modifier
-                            .fillMaxSize()
-                            .clickable { },
-                        imageVector = Icons.Filled.Refresh,
-                        contentDescription = "Update list"
-                    )
-                else
-                    CircularProgressIndicator()
-            }
-            Spacer(modifier = Modifier.size(28.dp))
-            Icon(
-                modifier = Modifier
-                    .size(36.dp)
-                    .clickable { },
-                imageVector = Icons.Filled.ExitToApp,
-                contentDescription = "Log out",
-            )
-            Spacer(modifier = Modifier.size(16.dp))
-        }
-    )
-}

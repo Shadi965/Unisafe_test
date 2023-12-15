@@ -21,6 +21,7 @@ class ShopListDatabaseModule {
         applicationContext: Context
     ): ShopListDatabase {
         return Room.databaseBuilder(applicationContext, ShopListDatabase::class.java, "shopList.db")
+            .createFromAsset("initial_shop_list.db")
             .build()
     }
 

@@ -1,5 +1,6 @@
 package ru.unisafe.example.navigation
 
+import ru.unisafe.products.presentation.ProductsRouter
 import kotlin.reflect.KProperty
 
 sealed class Screen(
@@ -14,6 +15,7 @@ sealed class Screen(
 
     object ShoppingLists : Screen("shopping_lists_screen/")
 
-    object Products : Screen("products_screen/", "{id}")
+    object Products : Screen("products_screen/",
+        "{${ProductsRouter.LIST_ID_ARG}}/{${ProductsRouter.LIST_NAME_ARG}}")
 
 }

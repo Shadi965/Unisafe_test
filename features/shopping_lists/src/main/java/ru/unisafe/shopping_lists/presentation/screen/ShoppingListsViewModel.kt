@@ -45,7 +45,7 @@ class ShoppingListsViewModel @Inject constructor(
 
     private val _isCheckedListsIds = MutableStateFlow<Set<Int>>(emptySet())
 
-    private val inProgressListsIds = MutableStateFlow<Set<Int>>(emptySet())
+    private val _inProgressListsIds = MutableStateFlow<Set<Int>>(emptySet())
 
     private val _isInLoading = MutableStateFlow<Boolean>(true)
     val isInLoading: StateFlow<Boolean> = _isInLoading
@@ -53,7 +53,7 @@ class ShoppingListsViewModel @Inject constructor(
     val list: Flow<List<ShoppingListView>?> = combine(
         _list,
         _isCheckedListsIds,
-        inProgressListsIds,
+        _inProgressListsIds,
         ::updateListFlow
     )
 
@@ -64,14 +64,9 @@ class ShoppingListsViewModel @Inject constructor(
                 _currentKey.value = getCurrentKeyUseCase.getCurrentKey()
             }
             launch {
-                _isCheckedListsIds.collect{
-                    _checkedMode.value = it.isNotEmpty()
-                    var isContainedAll: Boolean = true
-                    _list.value?.forEach { list ->
-                        if (!it.contains(list.id))
-                            isContainedAll = false
-                    }
-                    _isCheckedAll.value = isContainedAll
+                _isCheckedListsIds.collect{ set ->
+                    _checkedMode.value = set.isNotEmpty()
+                    _isCheckedAll.value = _list.value?.firstOrNull { !set.contains(it.id) } == null
                 }
             }
             getShoppingListsUseKeys.getShoppingLists().collect {
@@ -111,13 +106,13 @@ class ShoppingListsViewModel @Inject constructor(
     }
 
     fun deleteList(listId: Int) {
-        val set = inProgressListsIds.value.toMutableSet()
+        val set = _inProgressListsIds.value.toMutableSet()
         viewModelScope.launch {
             set.add(listId)
-            inProgressListsIds.value = set
+            _inProgressListsIds.value = set
             deleteShoppingListUseCase.deleteShoppingList(listId)
             set.remove(listId)
-            inProgressListsIds.value = set
+            _inProgressListsIds.value = set
         }
     }
 
@@ -127,11 +122,10 @@ class ShoppingListsViewModel @Inject constructor(
         set.forEach{
             deleteList(it)
         }
-
     }
 
-    fun openProductsScreen(listId: Int) {
-        router.openProductsScreen(listId)
+    fun openProductsScreen(listId: Int, listName: String) {
+        router.openProductsScreen(listId, listName)
     }
 
     fun loadAgain() {

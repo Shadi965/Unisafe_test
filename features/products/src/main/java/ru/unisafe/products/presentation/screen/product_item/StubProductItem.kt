@@ -1,4 +1,4 @@
-package ru.unisafe.shopping_lists.presentation.screen
+package ru.unisafe.products.presentation.screen.product_item
 
 import androidx.compose.animation.core.FastOutSlowInEasing
 import androidx.compose.animation.core.animateFloat
@@ -55,32 +55,20 @@ fun StubItem(brush: Brush) {
         .fillMaxWidth()
         .padding(8.dp)
         .background(brush)
-        .border(
-            3.dp, Brush.linearGradient(
-                listOf(
-                    Color.LightGray.copy(alpha = 0.6f),
-                    Color.LightGray.copy(alpha = 0.2f),
-                    Color.LightGray.copy(alpha = 0.6f)
-                )
-            ), shape = RectangleShape
-        )
         .padding(8.dp)) {
-        val (name, date, id) = createRefs()
+
+
+
+        val (name, count) = createRefs()
         Text(text = "", fontSize = 24.sp,
             modifier = Modifier.constrainAs(name){}
         )
         Text(text = "", fontSize = 16.sp,
             modifier = Modifier
-                .constrainAs(date) {
+                .constrainAs(count) {
                     top.linkTo(name.bottom)
                 }
                 .padding(top = 4.dp)
-        )
-        Text(text = "", fontSize = 20.sp,
-            modifier = Modifier.constrainAs(id){
-                end.linkTo(parent.end)
-                bottom.linkTo(date.bottom)
-            }
         )
     }
 }

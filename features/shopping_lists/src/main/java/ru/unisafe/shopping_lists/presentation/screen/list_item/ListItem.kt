@@ -1,4 +1,4 @@
-package ru.unisafe.shopping_lists.presentation.screen
+package ru.unisafe.shopping_lists.presentation.screen.list_item
 
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.border
@@ -17,6 +17,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.constraintlayout.compose.ConstraintLayout
 import ru.unisafe.shopping_lists.domain.entities.ShoppingListView
+import ru.unisafe.shopping_lists.presentation.screen.ShoppingListsViewModel
 
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
@@ -45,7 +46,7 @@ fun ListItem(
     layoutModifier = if (!checkedMode)
         layoutModifier.combinedClickable(
             onLongClick = { viewModel.checkTheList(list.id) },
-            onClick = { viewModel.openProductsScreen(list.id) }
+            onClick = { viewModel.openProductsScreen(list.id, list.name) }
         )
     else layoutModifier.clickable { viewModel.checkTheList(list.id) }
 

@@ -11,6 +11,8 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.navArgument
 import ru.unisafe.auth.presentation.screen.AuthScreen
+import ru.unisafe.products.presentation.ProductsRouter
+import ru.unisafe.products.presentation.screen.ProductsScreen
 import ru.unisafe.shopping_lists.presentation.screen.ShoppingListsScreen
 
 typealias NavAction = NavHostController.() -> Unit
@@ -40,11 +42,16 @@ object Navigator {
         }
         composable(
             route = Screen.Products.withArgument,
-            arguments = listOf(navArgument("id") {
+            arguments = listOf(
+                navArgument(ProductsRouter.LIST_ID_ARG) {
                 type = NavType.IntType
-            })
+                },
+                navArgument(ProductsRouter.LIST_NAME_ARG) {
+                    type = NavType.StringType
+                }
+            )
         ) {
-            Text(text = "Products Screen ${it.arguments?.getInt("id")?.toString()}", fontSize = 32.sp)
+            ProductsScreen()
         }
     }
 

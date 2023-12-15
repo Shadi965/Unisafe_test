@@ -8,6 +8,8 @@ import ru.unisafe.data.retrofit.ADD_ITEM_TO_SHOPPING_LIST
 import ru.unisafe.data.retrofit.CROSS_ITEM_OFF
 import ru.unisafe.data.retrofit.GET_SHOPPING_LIST
 import ru.unisafe.data.retrofit.REMOVE_ITEM_FROM_LIST
+import ru.unisafe.data.retrofit.products.entities.GetProductsResponse
+import ru.unisafe.data.retrofit.products.entities.ProductCreateResponse
 
 interface ProductsAPI {
 
@@ -49,7 +51,7 @@ interface ProductsAPI {
      * Content-Type: application/json
      */
     @GET(GET_SHOPPING_LIST)
-    suspend fun getShoppingList(@Query("list_id") listId: Int): ResponseBody
+    suspend fun getShoppingList(@Query("list_id") listId: Int): GetProductsResponse
 
     /**
      * Принимает id списка, имя товара, и количество товара
@@ -83,7 +85,7 @@ interface ProductsAPI {
         @Query("id") listId: Int,
         @Query("value") itemName: String,
         @Query("n") quantityOfItem: Int
-    ): ResponseBody
+    ): ProductCreateResponse
 
     /**
      * Принимает id списка и id товара
@@ -114,7 +116,7 @@ interface ProductsAPI {
     suspend fun removeItemFromList(
         @Query("list_id") listId: Int,
         @Query("item_id") itemId: Int
-    ): ResponseBody
+    )
 
     /**
      * Принимает id продукта

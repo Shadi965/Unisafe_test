@@ -10,9 +10,9 @@ import javax.inject.Singleton
 class ShoppingListsRouterImpl @Inject constructor(
     private val navigator: Navigator
 ) : ShoppingListsRouter {
-    override fun openProductsScreen(listId: Int) {
+    override fun openProductsScreen(listId: Int, listName: String) {
         navigator {
-            navigate(Screen.Products.route + listId)
+            navigate(Screen.Products.route + listId + "/" + listName)
         }
     }
 }
