@@ -1,7 +1,7 @@
 package ru.unisafe.data_common.products
 
 import kotlinx.coroutines.flow.Flow
-import ru.unisafe.data_common.products.entity.Product
+import ru.unisafe.data_common.products.entities.Product
 
 interface ProductsDataRepository {
 

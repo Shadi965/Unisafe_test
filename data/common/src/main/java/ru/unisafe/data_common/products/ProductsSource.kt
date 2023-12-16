@@ -1,6 +1,6 @@
 package ru.unisafe.data_common.products
 
-import ru.unisafe.data_common.products.entity.Product
+import ru.unisafe.data_common.products.entities.Product
 
 interface ProductsSource {
 

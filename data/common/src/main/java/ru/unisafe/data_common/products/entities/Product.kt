@@ -1,4 +1,4 @@
-package ru.unisafe.data_common.products.entity
+package ru.unisafe.data_common.products.entities
 
 data class Product(
     val id: Int,

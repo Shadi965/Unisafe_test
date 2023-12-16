@@ -1,7 +1,7 @@
 package ru.unisafe.retrofit.products.entities
 
 import com.squareup.moshi.Json
-import ru.unisafe.data_common.products.entity.Product
+import ru.unisafe.data_common.products.entities.Product
 
 data class ProductDTO(
     val id: Int,

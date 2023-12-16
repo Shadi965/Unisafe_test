@@ -1,7 +1,7 @@
 package ru.unisafe.retrofit.products
 
 import ru.unisafe.data_common.products.ProductsSource
-import ru.unisafe.data_common.products.entity.Product
+import ru.unisafe.data_common.products.entities.Product
 import javax.inject.Inject
 import javax.inject.Singleton
 

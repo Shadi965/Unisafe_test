@@ -5,7 +5,7 @@ import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.map
 import ru.unisafe.data_common.products.ProductsDataRepository
 import ru.unisafe.data_common.products.ProductsSource
-import ru.unisafe.data_common.products.entity.Product
+import ru.unisafe.data_common.products.entities.Product
 import ru.unisafe.room.products.ProductCrossOffTuple
 import ru.unisafe.room.products.ProductDbEntity
 import ru.unisafe.room.products.ProductDeleteTuple
