@@ -13,7 +13,7 @@ class KeyDataRepositorySharedPreferencesImpl @Inject constructor(
 
     private var currentKey: String? = null
 
-    private val sharedPreferences = applicationContext.getSharedPreferences("settings", Context.MODE_PRIVATE)
+    private val sharedPreferences = applicationContext.getSharedPreferences(FILE_NAME, Context.MODE_PRIVATE)
 
     override fun getDefaultKey(): String {
         return super.getDefaultKey()
@@ -37,6 +37,7 @@ class KeyDataRepositorySharedPreferencesImpl @Inject constructor(
 
     companion object {
         const val LAST_AUTH_KEY = "last_auth_key"
+        const val FILE_NAME = "settings"
     }
 
 }
