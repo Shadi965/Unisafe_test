@@ -1,4 +1,4 @@
-package ru.unisafe.data.room.shopping_lists
+package ru.unisafe.room.shopping_lists
 
 import androidx.room.ColumnInfo
 

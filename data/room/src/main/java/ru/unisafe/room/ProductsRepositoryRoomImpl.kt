@@ -1,4 +1,4 @@
-package ru.unisafe.data.room
+package ru.unisafe.room
 
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.first
@@ -6,10 +6,10 @@ import kotlinx.coroutines.flow.map
 import ru.unisafe.data_common.products.ProductsDataRepository
 import ru.unisafe.data_common.products.ProductsSource
 import ru.unisafe.data_common.products.entity.Product
-import ru.unisafe.data.room.products.ProductCrossOffTuple
-import ru.unisafe.data.room.products.ProductDbEntity
-import ru.unisafe.data.room.products.ProductDeleteTuple
-import ru.unisafe.data.room.products.ProductsDao
+import ru.unisafe.room.products.ProductCrossOffTuple
+import ru.unisafe.room.products.ProductDbEntity
+import ru.unisafe.room.products.ProductDeleteTuple
+import ru.unisafe.room.products.ProductsDao
 import java.io.IOException
 import javax.inject.Inject
 import javax.inject.Singleton

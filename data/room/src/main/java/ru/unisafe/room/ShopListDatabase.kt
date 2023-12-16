@@ -1,11 +1,11 @@
-package ru.unisafe.data.room
+package ru.unisafe.room
 
 import androidx.room.Database
 import androidx.room.RoomDatabase
-import ru.unisafe.data.room.products.ProductDbEntity
-import ru.unisafe.data.room.products.ProductsDao
-import ru.unisafe.data.room.shopping_lists.ShoppingListDbEntity
-import ru.unisafe.data.room.shopping_lists.ShoppingListsDao
+import ru.unisafe.room.products.ProductDbEntity
+import ru.unisafe.room.products.ProductsDao
+import ru.unisafe.room.shopping_lists.ShoppingListDbEntity
+import ru.unisafe.room.shopping_lists.ShoppingListsDao
 
 @Database(
     version = 1,

@@ -1,9 +1,9 @@
-package ru.unisafe.data.room.products
+package ru.unisafe.room.products
 
 import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.ForeignKey
-import ru.unisafe.data.room.shopping_lists.ShoppingListDbEntity
+import ru.unisafe.room.shopping_lists.ShoppingListDbEntity
 
 @Entity(
     tableName = "products",

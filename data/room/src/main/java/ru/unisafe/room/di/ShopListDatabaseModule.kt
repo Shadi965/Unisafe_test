@@ -1,4 +1,4 @@
-package ru.unisafe.data.room.di
+package ru.unisafe.room.di
 
 import android.content.Context
 import androidx.room.Room
@@ -7,9 +7,9 @@ import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
-import ru.unisafe.data.room.ShopListDatabase
-import ru.unisafe.data.room.products.ProductsDao
-import ru.unisafe.data.room.shopping_lists.ShoppingListsDao
+import ru.unisafe.room.ShopListDatabase
+import ru.unisafe.room.products.ProductsDao
+import ru.unisafe.room.shopping_lists.ShoppingListsDao
 
 @Module
 @InstallIn(SingletonComponent::class)

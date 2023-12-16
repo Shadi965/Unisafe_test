@@ -1,4 +1,4 @@
-package ru.unisafe.data.room.products
+package ru.unisafe.room.products
 
 import androidx.room.Dao
 import androidx.room.Delete
