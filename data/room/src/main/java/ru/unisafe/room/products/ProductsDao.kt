@@ -25,6 +25,6 @@ interface ProductsDao {
     @Query("SELECT is_crossed FROM products WHERE shopping_list_id = :listId AND id = :productId")
     suspend fun isProductCrossedOff(listId: Int, productId: Int): Boolean
 
-    @Query("SELECT MAX(id) FROM products WHERE shopping_list_id = :listId")
-    suspend fun getLastProductIdByList(listId: Int): Int
+    @Query("SELECT MAX(id) FROM products")
+    suspend fun getLastProductIdByList(): Int
 }

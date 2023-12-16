@@ -78,7 +78,7 @@ class ShoppingListsRepositoryRoomImpl @Inject constructor(
             shoppingListsSource.createShoppingList(key, name)
         } catch (e: IOException) {
             //todo
-            shoppingListsDao.getLastListIdByKey(key) + 1
+            shoppingListsDao.getLastListIdByKey() + 1
         }
 
         val dateFormat = SimpleDateFormat("yyyy-MM-dd HH:mm:ss")

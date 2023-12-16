@@ -42,7 +42,7 @@ class ProductsRepositoryRoomImpl @Inject constructor(
             productsSource.addNewProductToList(listId, productName, count)
         } catch (e: IOException) {
             //todo
-            productsDao.getLastProductIdByList(listId)
+            productsDao.getLastProductIdByList() + 1
         }
         productsDao.addProduct(
             ProductDbEntity(

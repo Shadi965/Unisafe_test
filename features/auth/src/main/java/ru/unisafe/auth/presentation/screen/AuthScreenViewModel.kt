@@ -10,6 +10,7 @@ import ru.unisafe.auth.domain.GetNewKeyUseCase
 import ru.unisafe.auth.domain.IsKeyCorrectUseCase
 import ru.unisafe.auth.domain.SaveKeyUseCase
 import ru.unisafe.auth.presentation.AuthRouter
+import java.io.IOException
 import javax.inject.Inject
 
 @HiltViewModel
@@ -28,10 +29,16 @@ class AuthScreenViewModel @Inject constructor(
 
     fun getNewKey() = viewModelScope.launch {
         isInProgress.value = true
-        key.value = getNewKeyUseCase.getNewKey()
-        isKeyIncorrect.value = false
-        isKeyVerified.value = true
-        isInProgress.value = false
+        try {
+            key.value = getNewKeyUseCase.getNewKey()
+            isKeyIncorrect.value = false
+            isKeyVerified.value = true
+        } catch (e: IOException) {
+            isKeyIncorrect.value = true
+            //todo
+        } finally {
+            isInProgress.value = false
+        }
     }
 
     fun sendKey(){
@@ -54,9 +61,16 @@ class AuthScreenViewModel @Inject constructor(
         isInProgress.value = true
         if (isKeyVerified.value) saveKey()
         else {
-            isKeyVerified.value = isKeyCorrectUseCase.isKeyCorrect(key.value)
-            isKeyIncorrect.value = !isKeyVerified.value
-            if (isKeyVerified.value) saveKey()
+            try {
+                isKeyVerified.value = isKeyCorrectUseCase.isKeyCorrect(key.value)
+                isKeyIncorrect.value = !isKeyVerified.value
+                if (isKeyVerified.value) saveKey()
+            } catch (e: IOException) {
+                isKeyIncorrect.value = true
+                //todo
+            } finally {
+                isInProgress.value = false
+            }
         }
         isInProgress.value = false
     }
