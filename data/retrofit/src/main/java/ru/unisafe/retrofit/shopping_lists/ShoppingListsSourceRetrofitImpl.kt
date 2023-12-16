@@ -1,4 +1,4 @@
-package ru.unisafe.retrofit.shoping_lists
+package ru.unisafe.retrofit.shopping_lists
 
 import ru.unisafe.data_common.shopping_lists.ShoppingListsSource
 import ru.unisafe.data_common.shopping_lists.entities.ShoppingList

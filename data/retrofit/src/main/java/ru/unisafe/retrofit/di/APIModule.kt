@@ -7,7 +7,7 @@ import dagger.hilt.components.SingletonComponent
 import retrofit2.Retrofit
 import ru.unisafe.retrofit.auth.AuthAPI
 import ru.unisafe.retrofit.products.ProductsAPI
-import ru.unisafe.retrofit.shoping_lists.ShoppingListsAPI
+import ru.unisafe.retrofit.shopping_lists.ShoppingListsAPI
 import javax.inject.Singleton
 
 @Module

@@ -9,7 +9,7 @@ import ru.unisafe.data_common.products.ProductsSource
 import ru.unisafe.data_common.shopping_lists.ShoppingListsSource
 import ru.unisafe.retrofit.auth.AuthSourceRetrofitImpl
 import ru.unisafe.retrofit.products.ProductsSourceRetrofitImpl
-import ru.unisafe.retrofit.shoping_lists.ShoppingListsSourceRetrofitImpl
+import ru.unisafe.retrofit.shopping_lists.ShoppingListsSourceRetrofitImpl
 
 @Module
 @InstallIn(SingletonComponent::class)
