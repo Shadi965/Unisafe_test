@@ -1,10 +1,9 @@
-package ru.unisafe.retrofit
+package ru.unisafe.retrofit.auth
 
 import okhttp3.MediaType
 import okhttp3.ResponseBody
 import retrofit2.HttpException
 import retrofit2.Response
-import ru.unisafe.retrofit.auth.AuthAPI
 import ru.unisafe.retrofit.auth.entities.AuthResponse
 
 class AuthAPITestStub(private val isKeyCorrect: Boolean = true) : AuthAPI {

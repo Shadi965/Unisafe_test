@@ -1,11 +1,10 @@
-package ru.unisafe.retrofit
+package ru.unisafe.retrofit.auth
 
 import kotlinx.coroutines.runBlocking
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertFalse
 import org.junit.Assert.assertTrue
 import org.junit.Test
-import ru.unisafe.retrofit.auth.AuthSourceRetrofitImpl
 
 class AuthSourceRetrofitImplTest {
 
