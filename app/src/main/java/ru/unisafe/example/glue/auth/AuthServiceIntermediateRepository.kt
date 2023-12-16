@@ -1,7 +1,7 @@
 package ru.unisafe.example.glue.auth
 
 import ru.unisafe.auth.domain.repositories.AuthServiceRepository
-import ru.unisafe.data.auth.AuthDataRepository
+import ru.unisafe.data_common.auth.AuthDataRepository
 import javax.inject.Inject
 import javax.inject.Singleton
 

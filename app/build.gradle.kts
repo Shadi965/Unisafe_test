@@ -81,6 +81,8 @@ dependencies {
     ksp(libs.hilt.android.compiler)
 
     implementation(project(":data"))
+    implementation(project(":data:common"))
+    implementation(project(":data:retrofit"))
     implementation(project(":features:auth"))
     implementation(project(":features:shopping_lists"))
     implementation(project(":features:products"))

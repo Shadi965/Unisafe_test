@@ -6,7 +6,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
-import ru.unisafe.data.auth.KeyDataRepository
+import ru.unisafe.data_common.auth.KeyDataRepository
 import ru.unisafe.example.navigation.Navigator
 import javax.inject.Inject
 

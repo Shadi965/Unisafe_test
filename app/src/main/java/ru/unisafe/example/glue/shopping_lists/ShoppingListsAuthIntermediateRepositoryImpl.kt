@@ -1,6 +1,6 @@
 package ru.unisafe.example.glue.shopping_lists
 
-import ru.unisafe.data.auth.AuthDataRepository
+import ru.unisafe.data_common.auth.AuthDataRepository
 import ru.unisafe.example.navigation.Navigator
 import ru.unisafe.example.navigation.Screen
 import ru.unisafe.shopping_lists.domain.repositories.ShoppingListsAuthRepository

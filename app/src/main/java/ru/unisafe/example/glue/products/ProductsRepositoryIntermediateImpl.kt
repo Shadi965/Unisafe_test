@@ -2,7 +2,7 @@ package ru.unisafe.example.glue.products
 
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
-import ru.unisafe.data.products.ProductsDataRepository
+import ru.unisafe.data_common.products.ProductsDataRepository
 import ru.unisafe.products.domain.entities.Product
 import ru.unisafe.products.domain.repositories.ProductsRepository
 import javax.inject.Inject

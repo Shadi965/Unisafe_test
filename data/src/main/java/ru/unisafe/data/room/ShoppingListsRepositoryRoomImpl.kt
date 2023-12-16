@@ -7,13 +7,13 @@ import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
-import ru.unisafe.data.auth.KeyDataRepository
-import ru.unisafe.data.retrofit.shoping_lists.entities.ShoppingListDTO
+import ru.unisafe.data_common.auth.KeyDataRepository
 import ru.unisafe.data.room.shopping_lists.ShoppingListDbEntity
 import ru.unisafe.data.room.shopping_lists.ShoppingListDeleteTuple
 import ru.unisafe.data.room.shopping_lists.ShoppingListsDao
-import ru.unisafe.data.shopping_lists.ShoppingListsDataRepository
-import ru.unisafe.data.shopping_lists.ShoppingListsSource
+import ru.unisafe.data_common.shopping_lists.ShoppingListsDataRepository
+import ru.unisafe.data_common.shopping_lists.ShoppingListsSource
+import ru.unisafe.data_common.shopping_lists.entities.ShoppingList
 import java.io.IOException
 import java.text.SimpleDateFormat
 import java.util.Date
@@ -54,7 +54,7 @@ class ShoppingListsRepositoryRoomImpl @Inject constructor(
         }
     }
 
-    override suspend fun getAllShoppingLists(key: String): Flow<List<ShoppingListDTO>?> = withContext(Dispatchers.IO) {
+    override suspend fun getAllShoppingLists(key: String): Flow<List<ShoppingList>?> = withContext(Dispatchers.IO) {
         try {
             updateDb(key)
         } catch (e: IOException) {
@@ -62,7 +62,7 @@ class ShoppingListsRepositoryRoomImpl @Inject constructor(
         }
         return@withContext shoppingListsDao.getShoppingListsByKey(key).map {
             it?.map { list ->
-                ShoppingListDTO(
+                ShoppingList(
                     id = list.id,
                     name = list.name,
                     createdAt = list.createdAt
@@ -80,11 +80,11 @@ class ShoppingListsRepositoryRoomImpl @Inject constructor(
             //todo
             shoppingListsDao.getLastListIdByKey(key) + 1
         }
+
         val dateFormat = SimpleDateFormat("yyyy-MM-dd HH:mm:ss")
         dateFormat.timeZone = TimeZone.getTimeZone("00:00")
         val currentTime = dateFormat.format(Date(System.currentTimeMillis()))
 
-        //val currentTime = SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(Date(System.currentTimeMillis()))
         shoppingListsDao.addShoppingList(
             ShoppingListDbEntity(
                 key = key,

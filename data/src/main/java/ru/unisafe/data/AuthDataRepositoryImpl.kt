@@ -1,8 +1,8 @@
 package ru.unisafe.data
 
-import ru.unisafe.data.auth.AuthDataRepository
-import ru.unisafe.data.auth.AuthSource
-import ru.unisafe.data.auth.KeyDataRepository
+import ru.unisafe.data_common.auth.AuthDataRepository
+import ru.unisafe.data_common.auth.AuthSource
+import ru.unisafe.data_common.auth.KeyDataRepository
 import javax.inject.Inject
 import javax.inject.Singleton
 

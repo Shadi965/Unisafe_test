@@ -3,9 +3,9 @@ package ru.unisafe.data.room
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.map
-import ru.unisafe.data.products.ProductsDataRepository
-import ru.unisafe.data.products.ProductsSource
-import ru.unisafe.data.products.entity.Product
+import ru.unisafe.data_common.products.ProductsDataRepository
+import ru.unisafe.data_common.products.ProductsSource
+import ru.unisafe.data_common.products.entity.Product
 import ru.unisafe.data.room.products.ProductCrossOffTuple
 import ru.unisafe.data.room.products.ProductDbEntity
 import ru.unisafe.data.room.products.ProductDeleteTuple
