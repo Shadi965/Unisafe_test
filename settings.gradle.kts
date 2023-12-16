@@ -16,9 +16,9 @@ dependencyResolutionManagement {
 rootProject.name = "Unisafe Test"
 include(":app")
 include(":features:auth")
-include(":data")
 include(":features:shopping_lists")
 include(":features:products")
 include(":data:retrofit")
 include(":data:common")
 include(":data:room")
+include(":data:common_impl")

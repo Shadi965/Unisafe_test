@@ -1,4 +1,4 @@
-package ru.unisafe.data.shared_preferences
+package ru.unisafe.common_impl
 
 import android.content.Context
 import dagger.hilt.android.qualifiers.ApplicationContext

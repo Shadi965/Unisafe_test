@@ -80,8 +80,8 @@ dependencies {
     implementation(libs.hilt.android)
     ksp(libs.hilt.android.compiler)
 
-    implementation(project(":data"))
     implementation(project(":data:common"))
+    implementation(project(":data:common_impl"))
     implementation(project(":data:room"))
     implementation(project(":data:retrofit"))
     implementation(project(":features:auth"))

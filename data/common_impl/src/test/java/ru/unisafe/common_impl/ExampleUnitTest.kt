@@ -1,7 +1,8 @@
-package ru.unisafe.data
+package ru.unisafe.common_impl
 
-import org.junit.Assert.assertEquals
 import org.junit.Test
+
+import org.junit.Assert.*
 
 /**
  * Example local unit test, which will execute on the development machine (host).

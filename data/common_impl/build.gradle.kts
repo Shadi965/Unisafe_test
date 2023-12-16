@@ -7,7 +7,7 @@ plugins {
 }
 
 android {
-    namespace = "ru.unisafe.data"
+    namespace = "ru.unisafe.common_impl"
     compileSdk = 34
 
     defaultConfig {

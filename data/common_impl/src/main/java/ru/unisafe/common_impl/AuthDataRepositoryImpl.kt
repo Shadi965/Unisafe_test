@@ -1,4 +1,4 @@
-package ru.unisafe.data
+package ru.unisafe.common_impl
 
 import ru.unisafe.data_common.auth.AuthDataRepository
 import ru.unisafe.data_common.auth.AuthSource

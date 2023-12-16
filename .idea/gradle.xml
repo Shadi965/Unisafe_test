@@ -12,6 +12,7 @@
             <option value="$PROJECT_DIR$/app" />
             <option value="$PROJECT_DIR$/data" />
             <option value="$PROJECT_DIR$/data/common" />
+            <option value="$PROJECT_DIR$/data/common_impl" />
             <option value="$PROJECT_DIR$/data/retrofit" />
             <option value="$PROJECT_DIR$/data/room" />
             <option value="$PROJECT_DIR$/features" />
