@@ -69,18 +69,6 @@ class KeyDataRepositorySharedPreferencesImplTest {
     }
 
     @Test
-    fun getLastKeyMultipleCallsExpectedTheSameResult() = runBlocking {
-        val keyRepository = KeyDataRepositorySharedPreferencesImpl(appContext)
-
-        keyRepository.saveKey("TEST")
-        val firstCall = keyRepository.getLastKey()
-        val secondCall = keyRepository.getLastKey()
-
-        assertEquals(firstCall, secondCall)
-
-    }
-
-    @Test
     fun getLastKeyCallBeforeAndAfterSaveKeyCallExpectedThatResultChanged() = runBlocking {
         val keyRepository = KeyDataRepositorySharedPreferencesImpl(appContext)
 
@@ -90,6 +78,18 @@ class KeyDataRepositorySharedPreferencesImplTest {
         val secondCall = keyRepository.getLastKey()
 
         assertNotEquals(firstCall, secondCall)
+    }
+
+    @Test
+    fun getLastKeyMultipleCallsExpectedTheSameResult() = runBlocking {
+        val keyRepository = KeyDataRepositorySharedPreferencesImpl(appContext)
+
+        keyRepository.saveKey("TEST")
+        val firstCall = keyRepository.getLastKey()
+        val secondCall = keyRepository.getLastKey()
+
+        assertEquals(firstCall, secondCall)
+
     }
 
     @Test
